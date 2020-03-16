@@ -30,7 +30,8 @@
     "flatqueue": "1.1.0",
     "mocha": "^7.0.1",
     "nyc": "^15.0.0",
-    "tinyqueue": "2.0.3"
+    "tinyqueue": "2.0.3",
+    "pairing-heap": "^1.0.0"
   },
   "nyc": {
     "all": true,
@@ -38,5 +39,6 @@
       "heapify.mjs"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+  }
 }

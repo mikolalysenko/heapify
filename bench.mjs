@@ -1,7 +1,7 @@
-
 import FlatQueue from 'flatqueue';
 import TinyQueue from 'tinyqueue';
 import Heapify from "./heapify.mjs";
+import pq from 'pairing-heap';
 
 const N = 1000000;
 const K = 1000;
@@ -77,3 +77,26 @@ for (let i = 0; i < N; i += K) {
     for (let j = 0; j < K; j++) heap.pop();
 }
 console.timeEnd(`heapify push/pop ${N}`);
+
+
+// PAIRING HEAP ---------------------------------------------------------
+{
+    console.time(`pairing heap create nodes ${N}`);
+    const nodes = data.map(pq.create);
+    console.timeEnd(`pairing heap create nodes ${N}`);
+
+    console.time(`pairing heap merge ${N}`);
+    let heap = nodes.reduce(pq.merge, pq.NIL);
+    console.timeEnd(`pairing heap merge ${N}`);
+
+    console.time(`pairing heap pop ${N}`);
+    for (let i = 0; i < N; i++) heap = pq.pop(heap);
+    console.timeEnd(`pairing heap pop ${N}`);
+
+    console.time(`pairing heap push/pop ${N}`);
+    for (let i = 0; i < N; i += K) {
+        for (let j = 0; j < K; j++) heap = pq.merge(heap, nodes[i]);
+        for (let j = 0; j < K; j++) heap = pq.pop(heap);
+    }
+    console.timeEnd(`pairing heap push/pop ${N}`);
+}
